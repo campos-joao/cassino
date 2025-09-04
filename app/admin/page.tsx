@@ -14,16 +14,7 @@ interface User {
   created_at: string;
 }
 
-interface Transaction {
-  id: number;
-  user_id: number;
-  type: string;
-  amount: string;
-  description: string;
-  status: string;
-  created_at: string;
-  user_name?: string;
-}
+// Transaction interface removed as it's currently unused in this page
 
 interface DashboardStats {
   totalUsers: number;
@@ -37,7 +28,6 @@ export default function AdminPanel() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [users, setUsers] = useState<User[]>([]);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [stats, setStats] = useState<DashboardStats>({
     totalUsers: 0,
     totalBalance: 0,

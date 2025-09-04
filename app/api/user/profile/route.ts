@@ -6,6 +6,12 @@ import { UserService } from '@/lib/userService';
 async function handleGET(request: AuthenticatedRequest) {
   try {
     const { user } = request;
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: 'Usuário não autenticado' },
+        { status: 401 }
+      );
+    }
     // Get user transactions
     const transactions = await UserService.getUserTransactions(user.id, 10);
     
@@ -26,7 +32,6 @@ async function handleGET(request: AuthenticatedRequest) {
 
 async function handlePUT(request: AuthenticatedRequest) {
   try {
-    const user = request.user;
     const body = await request.json();
     const { name } = body;
 

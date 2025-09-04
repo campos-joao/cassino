@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyToken } from './auth';
 import { UserService } from './userService';
+import { User } from '@/types/user';
 
 export interface AuthenticatedRequest extends NextRequest {
-  user?: any;
+  user?: User;
 }
 
-export async function authenticate(request: NextRequest): Promise<{ success: boolean; user?: any; message?: string }> {
+export async function authenticate(request: NextRequest): Promise<{ success: boolean; user?: User; message?: string }> {
   try {
     // Get token from cookie or Authorization header
     const token = request.cookies.get('auth-token')?.value || 
@@ -52,6 +53,12 @@ export function requireAuth(handler: (request: AuthenticatedRequest) => Promise<
     }
 
     // Add user to request
+    if (!auth.user) {
+      return NextResponse.json(
+        { success: false, message: 'Usuário não encontrado' },
+        { status: 401 }
+      );
+    }
     (request as AuthenticatedRequest).user = auth.user;
     
     return handler(request as AuthenticatedRequest);
@@ -69,7 +76,7 @@ export function requireAdmin(handler: (request: AuthenticatedRequest) => Promise
       );
     }
 
-    if (auth.user.role !== 'admin') {
+    if (!auth.user || auth.user.role !== 'admin') {
       return NextResponse.json(
         { success: false, message: 'Acesso negado. Apenas administradores.' },
         { status: 403 }

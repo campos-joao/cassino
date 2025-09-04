@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const games = [
   {
@@ -23,7 +24,7 @@ export default function LobbyPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {games.map((game) => (
           <Link href={game.href} key={game.name} className="bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center hover:bg-gray-700 transition-colors">
-            <img src={game.image} alt={game.name} className="w-40 h-40 object-cover rounded mb-4" />
+            <Image src={game.image} alt={game.name} width={160} height={160} className="w-40 h-40 object-cover rounded mb-4" />
             <h2 className="text-xl font-bold mb-2">{game.name}</h2>
             <p className="text-gray-300 text-center">{game.description}</p>
           </Link>

@@ -1,4 +1,4 @@
-import Link from "next/link";
+// Removed unused Link import
 
 const sports = [
   { name: "Futebol", icon: (

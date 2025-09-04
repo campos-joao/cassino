@@ -39,6 +39,14 @@ async function handlePOST(request: AuthenticatedRequest) {
       );
     }
 
+    // Ensure authenticated user exists
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: 'Usuário não autenticado' },
+        { status: 401 }
+      );
+    }
+
     // Process deposit
     const result = await UserService.processDeposit(user.id, {
       amount: depositAmount,
@@ -73,6 +81,13 @@ async function handleGET(request: AuthenticatedRequest) {
   try {
     const user = request.user;
     
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: 'Usuário não autenticado' },
+        { status: 401 }
+      );
+    }
+
     // Get user deposit history
     const transactions = await UserService.getUserTransactions(user.id, 50);
     const deposits = transactions.filter(t => t.type === 'deposit');

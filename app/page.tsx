@@ -22,13 +22,13 @@ export default function Home() {
       <section className="w-full flex-1 flex flex-col items-center justify-center px-4 pb-12">
         <div className="max-w-4xl w-full grid grid-cols-1 sm:grid-cols-2 gap-8">
           <div className="bg-white/80 rounded-lg shadow-lg p-6 flex flex-col items-center">
-            <img src="/games/roleta.jpg" alt="Roleta" className="w-32 h-32 object-cover rounded mb-4 border-4 border-yellow-300" />
+            <Image src="/games/roleta.jpg" alt="Roleta" width={128} height={128} className="w-32 h-32 object-cover rounded mb-4 border-4 border-yellow-300" />
             <h3 className="text-xl font-bold text-yellow-900 mb-2">Roleta</h3>
             <p className="text-gray-700 text-center mb-2">Aposte na sorte e tente ganhar na roleta clássica!</p>
             <a href="/games/roleta" className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold py-2 px-6 rounded-full shadow transition-colors">Jogar</a>
           </div>
           <div className="bg-white/80 rounded-lg shadow-lg p-6 flex flex-col items-center">
-            <img src="/games/slots.jpg" alt="Slots" className="w-32 h-32 object-cover rounded mb-4 border-4 border-yellow-300" />
+            <Image src="/games/slots.jpg" alt="Slots" width={128} height={128} className="w-32 h-32 object-cover rounded mb-4 border-4 border-yellow-300" />
             <h3 className="text-xl font-bold text-yellow-900 mb-2">Slots</h3>
             <p className="text-gray-700 text-center mb-2">Gire os rolos e busque grandes prêmios nos caça-níqueis!</p>
             <a href="/games/slots" className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-bold py-2 px-6 rounded-full shadow transition-colors">Jogar</a>
