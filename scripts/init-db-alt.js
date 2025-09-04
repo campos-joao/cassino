@@ -1,13 +1,21 @@
+/* eslint-disable */
 const { Pool } = require('pg');
 
-// Configuração explícita do banco
-const pool = new Pool({
-  user: 'postgres',
-  password: '123',
-  host: 'localhost',
-  port: 5432,
-  database: 'cassino',
-});
+// Usa DATABASE_URL quando disponível (Supabase/produção), com SSL quando necessário
+const connectionString = process.env.DATABASE_URL;
+
+const pool = connectionString
+  ? new Pool({
+      connectionString,
+      ssl: { rejectUnauthorized: false },
+    })
+  : new Pool({
+      user: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD || '123',
+      host: process.env.DB_HOST || 'localhost',
+      port: Number(process.env.DB_PORT || 5432),
+      database: process.env.DB_NAME || 'cassino',
+    });
 
 async function createTables() {
   const client = await pool.connect();
